@@ -44,3 +44,4 @@ C:\Users\XPC\Desktop\Quercu\QuercuPractica\QuercoPractica\QuercuApi\QuercuApi\ob
 C:\Users\XPC\Desktop\Quercu\QuercuPractica\QuercoPractica\QuercuApi\QuercuApi\obj\Debug\net6.0\QuercuApi.pdb
 C:\Users\XPC\Desktop\Quercu\QuercuPractica\QuercoPractica\QuercuApi\QuercuApi\obj\Debug\net6.0\QuercuApi.genruntimeconfig.cache
 C:\Users\XPC\Desktop\Quercu\QuercuPractica\QuercoPractica\QuercuApi\QuercuApi\obj\Debug\net6.0\ref\QuercuApi.dll
+C:\Users\XPC\Desktop\Quercu\QuercuPractica\QuercoPractica\QuercuApi\QuercuApi\obj\Debug\net6.0\QuercuApi.sourcelink.json

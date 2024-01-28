@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("QuercuApi")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1c96acc8751b64677e231090c32e29738dad213b")]
 [assembly: System.Reflection.AssemblyProductAttribute("QuercuApi")]
 [assembly: System.Reflection.AssemblyTitleAttribute("QuercuApi")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -1,4 +1,4 @@
-﻿using ProyectoAPI.Entities;
+﻿using QuercuApi.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -16,14 +16,14 @@ namespace QuercuApi.Controllers
     public class PropertyTypeController : ControllerBase
     {
         private readonly IConfiguration _configuration;
-        private readonly IUtilitarios _utilitarios;
+     
         private string _connection;
 
-        public PropertyTypeController(IConfiguration configuration, IUtilitarios utilitarios)
+        public PropertyTypeController(IConfiguration configuration)
         {
             _configuration = configuration;
             _connection = _configuration.GetConnectionString("DefaultConnection");
-            _utilitarios = utilitarios;
+          
         }
 
         [HttpGet]
@@ -79,7 +79,7 @@ namespace QuercuApi.Controllers
             {
                 using (var context = new SqlConnection(_connection))
                 {
-                    var datos = context.Query<OwnerEnt>("ConsultarPropertyTypePorId",
+                    var datos = context.Query<PropertyTypeEnt>("ConsultarPropertyTypePorId",
                         new { Id = id },
                         commandType: CommandType.StoredProcedure).SingleOrDefault();
 

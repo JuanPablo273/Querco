@@ -1,4 +1,4 @@
-﻿using ProyectoAPI.Entities;
+﻿using QuercuApi.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -16,14 +16,13 @@ namespace QuercuApi.Controllers
     public class PropertyController : ControllerBase
     {
         private readonly IConfiguration _configuration;
-        private readonly IUtilitarios _utilitarios;
         private string _connection;
 
-        public PropertyController(IConfiguration configuration, IUtilitarios utilitarios)
+        public PropertyController(IConfiguration configuration)
         {
             _configuration = configuration;
             _connection = _configuration.GetConnectionString("DefaultConnection");
-            _utilitarios = utilitarios;
+
         }
 
         [HttpGet]
@@ -51,14 +50,14 @@ namespace QuercuApi.Controllers
         [HttpPost]
         [AllowAnonymous]
         [Route("RegistrarProperty")]
-        public IActionResult RegistrarOwner(PropertyEnt entidad)
+        public IActionResult RegistrarProperty(PropertyEnt entidad)
         {
             try
             {
                 using (var context = new SqlConnection(_connection))
                 {
-                    var datos = context.Query<long>("RegistrarOwner",
-                        new { entidad.PropertyTypeId, entidad.OwnerId, entidad.Number, entidad.Address, entidad.Area, entidad.ContructionArea },
+                    var datos = context.Query<long>("RegistrarProperty",
+                        new { entidad.PropertyTypeId, entidad.OwnerId, entidad.Number, entidad.Address, entidad.Area, entidad.ConstructionArea },
                         commandType: CommandType.StoredProcedure).FirstOrDefault();
 
                     return Ok(datos);
@@ -79,7 +78,7 @@ namespace QuercuApi.Controllers
             {
                 using (var context = new SqlConnection(_connection))
                 {
-                    var datos = context.Query<OwnerEnt>("ConsultarPropertyPorId",
+                    var datos = context.Query<PropertyEnt>("ConsultarPropertyPorId",
                         new { Id = id },
                         commandType: CommandType.StoredProcedure).SingleOrDefault();
 
@@ -110,7 +109,7 @@ namespace QuercuApi.Controllers
                 using (var context = new SqlConnection(_connection))
                 {
                     var datos = context.Execute("ActualizarProperty",
-                        new { entidad.PropertyTypeId, entidad.OwnerId, entidad.Number, entidad.Address, entidad.Area, entidad.ContructionArea, entidad.Id },
+                        new { entidad.PropertyTypeId, entidad.OwnerId, entidad.Number, entidad.Address, entidad.Area, entidad.ConstructionArea, entidad.Id },
                         commandType: CommandType.StoredProcedure);
 
                     return Ok(datos);
@@ -126,14 +125,14 @@ namespace QuercuApi.Controllers
 
         [HttpPut]
         [AllowAnonymous]
-        [Route("ActualizarPropertyOwner")]
-        public IActionResult ActualizarPropertyOwner(OwnerEnt entidad)
+        [Route("ActualizarEstadoProperty")]
+        public IActionResult ActualizarEstadoProperty(PropertyEnt entidad)
         {
             try
             {
                 using (var context = new SqlConnection(_connection))
                 {
-                    var datos = context.Execute("ActualizarPropertyOwner",
+                    var datos = context.Execute("ActualizarEstadoProperty",
                         new { entidad.Id },
                         commandType: CommandType.StoredProcedure);
 

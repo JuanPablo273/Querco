@@ -1,4 +1,4 @@
-﻿using ProyectoAPI.Entities;
+﻿using QuercuApi.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -16,14 +16,12 @@ namespace QuercuApi.Controllers
     public class OwnerController : ControllerBase
     {
         private readonly IConfiguration _configuration;
-        private readonly IUtilitarios _utilitarios;
         private string _connection;
 
-        public OwnerController(IConfiguration configuration, IUtilitarios utilitarios)
+        public OwnerController(IConfiguration configuration)
         {
             _configuration = configuration;
             _connection = _configuration.GetConnectionString("DefaultConnection");
-            _utilitarios = utilitarios;
         }
 
         [HttpGet]
@@ -58,7 +56,7 @@ namespace QuercuApi.Controllers
                 using (var context = new SqlConnection(_connection))
                 {
                     var datos = context.Query<long>("RegistrarOwner",
-                        new { entidad.Description, entidad.Name, entidad.Telephone, entidad.Email, entidad.IdentificationNumer, entidad.Address },
+                        new {  entidad.Name, entidad.Telephone, entidad.Email, entidad.IdentificationNumber, entidad.Address },
                         commandType: CommandType.StoredProcedure).FirstOrDefault();
 
                     return Ok(datos);
@@ -73,7 +71,7 @@ namespace QuercuApi.Controllers
         [HttpGet]
         [AllowAnonymous]
         [Route("ConsultarOwnerPorId/{id}")]
-        public IActionResult ConsultarProductoPorId(long id)
+        public IActionResult ConsultarOwnerPorId(long id)
         {
             try
             {
@@ -110,7 +108,7 @@ namespace QuercuApi.Controllers
                 using (var context = new SqlConnection(_connection))
                 {
                     var datos = context.Execute("ActualizarOwner",
-                        new { entidad.Description, entidad.Name, entidad.Telephone, entidad.Email, entidad.IdentificationNumer, entidad.Address, entidad.Id },
+                        new {  entidad.Name, entidad.Telephone, entidad.Email, entidad.IdentificationNumber, entidad.Address, entidad.Id },
                         commandType: CommandType.StoredProcedure);
 
                     return Ok(datos);
